@@ -1,0 +1,64 @@
+html {
+  cursor: text;
+}
+
+.editbox {
+  margin: .4em;
+  padding: 0;
+  font-family: monospace;
+  font-size: 10pt;
+  color: black;
+}
+
+pre.code, .editbox {
+  color: #666666;
+}
+
+.editbox p {
+  margin: 0;
+}
+
+span.c-punctuation {
+  color: green;
+}
+
+span.c-operator {
+  color: purple;
+}
+
+span.c-keyword {
+  color: blue;
+}
+
+span.c-atom {
+  color: brown;
+}
+
+span.c-variable {
+  color: black;
+}
+
+span.c-variabledef {
+  color: #0000FF;
+}
+
+span.c-localvariable {
+  color: #004499;
+}
+
+span.c-property {
+  color: black;
+}
+
+span.c-comment {
+  color: #00AAFF;
+}
+
+span.c-string {
+  color: red;
+}
+
+span.c-import {
+  color: green;
+}
+

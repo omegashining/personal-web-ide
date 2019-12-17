@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition>
+		<rich:toolBar>
+			Datos: <h:inputText id="input" value="#{codeBean.input}" style="width: 290px;" />
+			<rich:toolBarGroup location="right">
+				<rich:menuItem action="#{codeBean.insert}" icon="/images/icons/accept.png" value="Aceptar" reRender="input" />
+			</rich:toolBarGroup>
+		</rich:toolBar>
+	</ui:composition>
+</html>

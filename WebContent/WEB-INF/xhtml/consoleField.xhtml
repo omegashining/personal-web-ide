@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition>
+		<rich:toolBar>
+			Consola
+			<rich:toolBarGroup location="right">
+				<rich:menuItem action="#{codeBean.stop}" icon="/images/icons/stop.png" value="Detener" />
+			</rich:toolBarGroup>
+		</rich:toolBar>
+		<h:inputTextarea id="console" value="#{codeBean.console}" rows="12" disabled="true" style="width: 99%; color: black; font-size: 12px;"/>
+		<a4j:poll id="poll" interval="1000" enabled="#{codeBean.pollEnabled}" reRender="poll, console" />
+	</ui:composition>
+</html>

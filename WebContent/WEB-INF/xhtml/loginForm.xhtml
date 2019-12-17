@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+   
+	<ui:composition>
+		<h2>Identificarme</h2>
+		<c:if test="${param.error == true}">
+	        <span class="errorblockForm">Usuario y/o Contraseña incorrectos.</span>
+	        <c:set var="username" value="#{sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
+		</c:if>
+		<form id="loginForm" action="#{request.contextPath}/j_spring_security_check" method="post" >
+			<h:panelGrid columns="1">
+				<rich:spacer height="10" />
+				<h:outputText value="Nombre de Usuario :" />
+				<h:inputText id="j_username" value="#{username}" size="40" />
+				<h:outputText value="Contraseña :" />
+				<h:inputSecret id="j_password" size="40" />
+			</h:panelGrid>
+            <rich:spacer height="25" />
+			<h:commandButton value=" Enviar " type="submit" action="#{userBean.info}" />
+		</form>
+	</ui:composition>
+</html>

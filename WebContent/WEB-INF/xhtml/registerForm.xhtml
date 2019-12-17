@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core">
+   
+	<ui:composition>
+		<h2>Registrarme<h:graphicImage value="/images/icons/pencil.png" /></h2>
+		
+		<c:if test="#{registerBean.error == 'password'}">
+	        <span class="errorblockForm">
+	        	Las contraseñas deben ser iguales.
+	        </span>
+		</c:if>
+		
+		<h:form>
+			<h:panelGrid columns="2">
+				<rich:spacer height="10" />
+				<rich:spacer height="10" />
+	            <h:outputText value="Ingresa tu Usuario :" />
+	            <h:outputText value="" />
+	            <h:inputText value="#{user.username}" id="username" size="35">
+	                <rich:beanValidator />
+	                <f:validator validatorId="usernameDisponibilityValidator" />
+	            	<f:attribute name="userDAO" value="#{userDAO}" />
+	            </h:inputText>
+	            <h:message for="username" styleClass="errorForm" />
+	                
+	            <h:outputText value="Contraseña deseada :" />
+	            <h:outputText value="" />
+	            <h:inputSecret value="#{user.password}" id="password" size="35">
+	            	<rich:beanValidator />
+	            </h:inputSecret>
+	            <h:message for="password" styleClass="errorForm" />
+	               
+	            <h:outputText value="Confirmar Contraseña :" />
+	            <h:outputText value="" />
+	            <h:inputSecret value="#{user.confirmPassword}" id="confirmPassword" size="35">
+	            	<rich:beanValidator />
+	            </h:inputSecret>
+	            <h:message for="confirmPassword" styleClass="errorForm" />
+	               
+	            <h:outputText value="E-mail :" />
+	            <h:outputText value="" />
+	            <h:inputText value="#{user.email}" id="email" size="35">
+	                <rich:beanValidator />
+	                <f:validator validatorId="emailDisponibilityValidator" />
+	            	<f:attribute name="userDAO" value="#{userDAO}" /> 
+	            </h:inputText>
+	            <h:message for="email" styleClass="errorForm" />
+	               
+	            <h:outputText value="País :" />
+	            <h:outputText value="" />
+	            <h:selectOneMenu value="#{user.country}" id="country" style="width:200px">
+	              	<rich:beanValidator />
+	              	<f:selectItems value="#{countrys.names}" />
+				</h:selectOneMenu>
+	            <h:message for="country" styleClass="errorForm" />
+	               
+	            <h:outputText value="Idioma :" />
+	            <h:outputText value="" />
+				<h:selectOneMenu value="#{user.language}" id="language" style="width:200px">
+			        <rich:beanValidator />
+	              	<f:selectItems value="#{languages.names}" />
+			    </h:selectOneMenu>
+	        	<h:message for="language" styleClass="errorForm" />
+	        </h:panelGrid>
+	           
+	        <rich:spacer width="180" height="25"/>
+			<h:commandButton value=" Enviar " type="submit" action="#{registerBean.add}">
+				<f:setPropertyActionListener value="#{user}" target="#{registerBean.user}"/>
+			</h:commandButton>
+		</h:form>
+	</ui:composition>
+</html>

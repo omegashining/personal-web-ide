@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#pages#register.xhtml"
+  PATH="/pages/register.xhtml" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#register.xhtml:0" NAME="item"
+   PATH="/pages/register.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{registerBean.add}:#pages#home.xhtml" NAME="output"
+    PATH="/pages/home.xhtml" TARGET="rules:#pages#home.xhtml"
+    TITLE="#{registerBean.add}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="fail:#{registerBean.add}:#pages#register.xhtml" NAME="output1"
+    PATH="/pages/register.xhtml" TARGET="rules:#pages#register.xhtml"
+    TITLE="#{registerBean.add}:fail" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#home.xhtml" PATH="/pages/home.xhtml"
+  SHAPE="320,40,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#development.xhtml"
+  PATH="/pages/development.xhtml" SHAPE="56,192,50,89" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#development.xhtml:0" NAME="item"
+   PATH="/pages/development.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="open:#{codeBean.open}:#pages#development.xhtml" NAME="output"
+    PATH="/pages/development.xhtml"
+    TARGET="rules:#pages#development.xhtml"
+    TITLE="#{codeBean.open}:open" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="close:#{codeBean.close}:#pages#development.xhtml" NAME="output1"
+    PATH="/pages/development.xhtml"
+    TARGET="rules:#pages#development.xhtml"
+    TITLE="#{codeBean.close}:close" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="insertValue:#{codeBean.insertValue}:#pages#development.xhtml"
+    NAME="output2" PATH="/pages/development.xhtml"
+    TARGET="rules:#pages#development.xhtml"
+    TITLE="#{codeBean.insertValue}:insertValue" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="move:#{fileBean.move}:#pages#development.xhtml" NAME="output6"
+    PATH="/pages/development.xhtml"
+    TARGET="rules:#pages#development.xhtml"
+    TITLE="#{fileBean.move}:move" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rename:#{fileBean.rename}:#pages#development.xhtml"
+    NAME="output4" PATH="/pages/development.xhtml"
+    TARGET="rules:#pages#development.xhtml"
+    TITLE="#{fileBean.rename}:rename" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="delete:#{fileBean.delete}:#pages#development.xhtml"
+    NAME="output5" PATH="/pages/development.xhtml"
+    TARGET="rules:#pages#development.xhtml"
+    TITLE="#{fileBean.delete}:delete" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="rename:#{folderBean.rename}:#pages#development.xhtml"
+    NAME="output7" PATH="/pages/development.xhtml"
+    TARGET="rules:#pages#development.xhtml"
+    TITLE="#{folderBean.rename}:rename" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="delete:#{folderBean.delete}:#pages#development.xhtml"
+    NAME="output3" PATH="/pages/development.xhtml"
+    TARGET="rules:#pages#development.xhtml"
+    TITLE="#{folderBean.delete}:delete" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="close:#{fileUploadBean.close}:#pages#development.xhtml"
+    NAME="output8" PATH="/pages/development.xhtml"
+    TARGET="rules:#pages#development.xhtml"
+    TITLE="#{fileUploadBean.close}:close" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

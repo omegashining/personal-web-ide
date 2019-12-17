@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+   
+	<ui:composition>
+		<rich:toolBar itemSeparator="grid">
+			<rich:spacer height="20" rendered="#{codeBean.language == '' || codeBean.language == null}" />
+			<rich:toolBarGroup rendered="#{codeBean.language == 'c' || codeBean.language == 'java' || codeBean.language == 'txt'}">
+	        	<rich:menuItem value="Guardar" action="#{codeBean.save}" icon="/images/icons/save.png" reRender="treeFiles" />
+	        </rich:toolBarGroup>
+	        <rich:toolBarGroup rendered="#{codeBean.language == 'c' || codeBean.language == 'java'}">
+	        	<rich:menuItem value="Compilar" action="#{codeBean.compile}" reRender="console, treeFiles" icon="/images/icons/compile.png" />
+	        	<rich:menuItem value="Ejecutar" action="#{codeBean.run}" reRender="console, treeFiles" icon="/images/icons/run.png" />
+	        	Tiempo(min):
+	        	<rich:inputNumberSpinner value="#{codeBean.pollTime}"  minValue="1" maxValue="15"/>
+	        </rich:toolBarGroup>
+	    </rich:toolBar>
+		<rich:spacer height="5" />
+	</ui:composition>
+</html>

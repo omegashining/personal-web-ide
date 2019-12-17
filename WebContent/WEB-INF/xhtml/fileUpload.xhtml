@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition>
+		<rich:modalPanel id="uploadModalPanel" resizeable="false" width="720" height="460" top="200">
+			<f:facet name="header">
+				<h:outputText value="Subir Archivos" />
+			</f:facet>
+			<f:facet name="controls">
+				<h:form>
+		            <h:panelGroup>
+		                <h:graphicImage value="/images/icons/close.png" styleClass="hidelink" id="hidelink" >
+		                	<a4j:support event="onclick" oncomplete="Richfaces.hideModalPanel('uploadModalPanel')" action="#{fileUploadBean.close}" />
+		                </h:graphicImage>
+		            </h:panelGroup>
+		        </h:form>
+	        </f:facet>
+			<h:form>
+				<h:panelGrid columns="2" columnClasses="topFileUpload, topFileUpload">
+					<rich:fileUpload id="upload" listWidth="360" listHeight="370" fileUploadListener="#{fileUploadBean.uploadListener}" maxFilesQuantity="#{fileUploadBean.uploadsAvailable}" immediateUpload="#{fileUploadBean.autoUpload}" allowFlash="#{fileUploadBean.useFlash}" acceptedTypes="jpg, gif, png, bmp, java, c, txt" addControlLabel="Agregar Archivo" clearAllControlLabel="Limpiar todo" cancelEntryControlLabel="Cancelar" clearControlLabel="Limpiar" stopControlLabel="Detener" stopEntryControlLabel="Detener proceso" uploadControlLabel="Subir archivo(s)">
+						<a4j:support event="onuploadcomplete" reRender="information" />
+					</rich:fileUpload>
+					<h:panelGroup id="information">
+						<rich:panel bodyClass="informationFileUpload">
+							<f:facet name="header">
+								<h:outputText value="Información de archivos subidos" />
+							</f:facet>
+							<h:outputText value="No hay archivos subidos actualmente." rendered="#{fileUploadBean.size == 0}" />
+							<rich:dataGrid columns="1" value="#{fileUploadBean.listFiles}" var="file" rowKeyVar="row">
+								<rich:panel>
+									<h:panelGrid columns="2">
+										<a4j:mediaOutput value="#{row}" element="img" mimeType="#{file.mime}" cacheable="false" createContent="#{fileUploadBean.paint}" style="width:120px; height:120px;">
+											<f:param value="#{fileUploadBean.timeStamp}" name="time" />
+										</a4j:mediaOutput>
+										<h:panelGrid columns="2">
+											<h:outputText value="Nombre:" />
+											<h:outputText value="#{file.name}" />
+											<h:outputText value="Tamaño:" />
+											<h:outputText value="#{file.length} bytes" />
+										</h:panelGrid>
+									</h:panelGrid>
+								</rich:panel>
+							</rich:dataGrid>
+						</rich:panel>
+						<rich:spacer height="5" />
+						<a4j:commandButton value="Limpiar lista de datos subidos" action="#{fileUploadBean.clearUploadData}" rendered="#{fileUploadBean.size > 0}" reRender="information, upload" />
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:form>
+		</rich:modalPanel>
+	</ui:composition>
+</html>

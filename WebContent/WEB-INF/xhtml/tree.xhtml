@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+	<ui:composition>
+		<rich:dragIndicator id="indicator" />
+		<rich:panel style="width:260px;">
+			<f:facet name="header">
+				<h:outputText value="Archivos" />
+			</f:facet>
+			<rich:tree id="treeFiles" switchType="ajax" stateAdvisor="#{treeDemoStateAdvisor}" ajaxSingle="true" style="width:240px">
+				<rich:recursiveTreeNodesAdaptor roots="#{fileSystemBean.nodes}" var="item" nodes="#{item.nodes}">
+					<rich:treeNode data="#{item.information}">
+						<f:facet name="icon">
+							<h:graphicImage value="/images/file_tree/#{item.information.extension}.png" />
+						</f:facet>
+						<f:facet name="iconLeaf">
+							<h:graphicImage value="/images/file_tree/#{item.information.extension}.png" />
+						</f:facet>
+						<rich:dragSupport rendered="#{item.information.type == 'image' || item.information.type == 'file' || item.information.type == 'exec'}" dragValue="#{item.name}" dragType="#{item.information.type}" dragIndicator="indicator" dragListener="#{fileBean.dragListener}">
+                			<rich:dndParam name="label" type="drag" value="#{item.information.type}: #{item.name}" />
+        				</rich:dragSupport>
+        				<rich:dropSupport rendered="#{item.information.type == 'root' || item.information.type == 'folder'}" acceptedTypes="image, file, exec" dropValue="#{item.name}" dropListener="#{fileBean.dropListener}" action="#{fileBean.move}" />
+        				<a4j:commandLink id="command" value="#{item.name}" >
+							<a4j:support rendered="#{item.information.type == 'file'}" event="ondblclick" actionListener="#{codeBean.commandLinkListener}" action="#{codeBean.open}" />
+						</a4j:commandLink>
+						<rich:contextMenu event="oncontextmenu" attachTo="command" submitMode="none">
+							<rich:menuItem rendered="#{item.information.type == 'root' || item.information.type == 'folder'}" value="Nuevo Archivo" icon="/images/icons/new_file.png">  
+				                <a4j:support event="onclick" onclick="Richfaces.showModalPanel('newFile')" actionListener="#{fileBean.menuItemListener}" />
+							</rich:menuItem>
+							<rich:menuItem rendered="#{item.information.type == 'image' || item.information.type == 'file'}" value="Renombrar" icon="/images/icons/rename.png">
+								<a4j:support event="onclick" onclick="Richfaces.showModalPanel('renameFile')" actionListener="#{fileBean.menuItemListener}" />
+							</rich:menuItem>
+							<rich:menuItem rendered="#{item.information.type == 'image' || item.information.type == 'file' || item.information.type == 'exec'}" value="Eliminar" icon="/images/icons/delete.png">
+								<a4j:support event="onclick" onclick="Richfaces.showModalPanel('deleteFile')" actionListener="#{fileBean.menuItemListener}" />
+							</rich:menuItem>
+							<rich:menuItem rendered="#{item.information.type == 'image' || item.information.type == 'file' || item.information.type == 'exec'}" icon="/images/icons/download.png">
+								<h:commandButton value="Descargar" actionListener="#{fileBean.menuItemListener}">
+									<p:fileDownload value="#{fileBean.streamedContent}" />
+								</h:commandButton>
+							</rich:menuItem>
+		                    <rich:menuItem rendered="#{item.information.type == 'root' || item.information.type == 'folder'}" value="Nuevo Folder" icon="/images/icons/new_folder.png">
+								<a4j:support event="onclick" onclick="Richfaces.showModalPanel('newFolder')" actionListener="#{folderBean.menuItemListener}" />
+							</rich:menuItem>
+		                    <rich:menuItem rendered="#{item.information.type == 'folder'}" value="Renombrar" icon="/images/icons/rename.png">
+								<a4j:support event="onclick" onclick="Richfaces.showModalPanel('renameFolder')" actionListener="#{folderBean.menuItemListener}" />
+							</rich:menuItem>
+							<rich:menuItem rendered="#{item.information.type == 'folder'}" value="Eliminar" icon="/images/icons/delete.png">
+								<a4j:support event="onclick" onclick="Richfaces.showModalPanel('deleteFolder')" actionListener="#{folderBean.menuItemListener}" />
+							</rich:menuItem>
+		                    <rich:menuItem rendered="#{item.information.type == 'root' || item.information.type == 'folder'}" value="Subir Archivos" icon="/images/icons/upload.png">
+								<a4j:support event="onclick" onclick="Richfaces.showModalPanel('uploadModalPanel')" actionListener="#{fileUploadBean.menuItemListener}" />
+							</rich:menuItem>
+		                </rich:contextMenu>
+					</rich:treeNode>
+				</rich:recursiveTreeNodesAdaptor>
+			</rich:tree>
+		</rich:panel>
+	</ui:composition>
+</html>

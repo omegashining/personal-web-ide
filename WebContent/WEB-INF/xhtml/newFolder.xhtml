@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition>
+		<rich:modalPanel id="newFolder" resizeable="false" height="100" width="250" top="300">
+			<f:facet name="header">
+				<h:outputText value="Nuevo Folder"/>
+			</f:facet>
+			<f:facet name="controls">
+	            <h:panelGroup>
+	                <h:graphicImage value="/images/icons/close.png">
+	                	<a4j:support event="onclick" oncomplete="Richfaces.hideModalPanel('newFolder')" action="#{folderBean.clearName}" reRender="newFolder" />
+	                </h:graphicImage>
+	            </h:panelGroup>
+	        </f:facet>
+	        <h:panelGrid columns="2">
+				<h:outputText value="Nombre: "/>
+				<h:inputText value="#{folderBean.name}" size="30" />
+			</h:panelGrid>
+			<h:panelGroup style="display:block; text-align:center">
+				<rich:spacer height="25" />
+				<a4j:commandButton value="Aceptar" onclick="Richfaces.hideModalPanel('newFolder')" action="#{folderBean.create}" reRender="treeFiles, newFolder"/>
+			</h:panelGroup>
+		</rich:modalPanel>
+	</ui:composition>
+</html>

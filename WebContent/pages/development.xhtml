@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+	<ui:composition template="/WEB-INF/facelets/template_2.xhtml">
+		<ui:define name="menu">
+			<ui:include src="/WEB-INF/xhtml/menu_2.xhtml" />
+		</ui:define>
+		<ui:define name="sidebar">
+			<ui:include src="/WEB-INF/xhtml/tree.xhtml" />
+			<ui:include src="/WEB-INF/xhtml/newFile.xhtml" />
+			<ui:include src="/WEB-INF/xhtml/renameFile.xhtml" />
+			<ui:include src="/WEB-INF/xhtml/deleteFile.xhtml" />
+			<ui:include src="/WEB-INF/xhtml/newFolder.xhtml" />
+			<ui:include src="/WEB-INF/xhtml/renameFolder.xhtml" />
+			<ui:include src="/WEB-INF/xhtml/deleteFolder.xhtml" />
+		</ui:define>
+		<ui:define name="toolbar">
+			<ui:include src="/WEB-INF/xhtml/toolBar.xhtml" />
+		</ui:define>
+		<ui:define name="content">
+			<ui:include src="/WEB-INF/xhtml/codeField.xhtml" />
+			<ui:include src="/WEB-INF/xhtml/consoleField.xhtml" />
+			<ui:include src="/WEB-INF/xhtml/inputField.xhtml" />
+		</ui:define>
+		<ui:define name="contentHide">
+			<ui:include src="/WEB-INF/xhtml/fileUpload.xhtml" />
+		</ui:define>
+	</ui:composition>
+</html>

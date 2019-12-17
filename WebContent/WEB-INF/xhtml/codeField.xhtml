@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition>
+		<rich:toolBar>
+		    Archivo: #{codeBean.shortPath}
+		    <rich:toolBarGroup location="right">
+				<h:graphicImage rendered="#{codeBean.shortPath != ''}" value="/images/icons/close.png">
+				   	<a4j:support event="onclick" action="#{codeBean.close}" />
+				</h:graphicImage>
+			</rich:toolBarGroup>
+		</rich:toolBar>
+		<t:inputTextarea rendered="#{codeBean.shortPath == ''}" rows="28" value="" disabled="true" style="width: 99%;" />
+		<t:inputTextarea rendered="#{codeBean.language == 'txt'}" rows="28" value="#{codeBean.text}" style="width: 99%;" />
+		<t:div rendered="#{codeBean.language == 'c' || codeBean.language == 'java'}" styleClass="textareaField">
+			<t:inputTextarea rendered="#{codeBean.language == 'c' || codeBean.language == 'java'}" id="code" forceId="true" value="#{codeBean.code}" />
+			<script type="text/javascript">
+				var editor = CodeMirror.fromTextArea('code', {
+					parserfile: ['../contrib/#{codeBean.language}/js/tokenize#{codeBean.language}.js', '../contrib/#{codeBean.language}/js/parse#{codeBean.language}.js'],
+					stylesheet: '#{request.contextPath}/codemirror/contrib/#{codeBean.language}/css/#{codeBean.language}colors.css',
+					path: '#{request.contextPath}/codemirror/js/', height: '400px'});
+			</script>
+		</t:div>
+	</ui:composition>
+</html>
